@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>productView</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+
+<!-- Navbar -->
+<nav class="bg-white shadow p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo and Store Name -->
+        <div class="flex items-center gap-2">
+            <img src="../images/logo.png" alt="GadgetHaven Logo" class="h-8 w-8"> <!-- Adjust size as needed -->
+            <h1 class="text-2xl font-bold text-blue-500">GadgetHaven</h1>
+        </div>
+
+        <!-- User Name Display and Cart Button -->
+<div class="flex items-center space-x-4">
+    <div id="customerName" class="text-gray-700 font-medium"></div>
+    <button id="cart-btn" class="flex items-center bg-blue-500 text-white font-medium px-4 py-2 rounded-lg shadow-lg transition-transform duration-200 hover:bg-blue-600 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-300">
+        Cart <span id="cart-count" class="bg-white text-blue-500 font-semibold ml-2 px-2 py-0.5 rounded-full">0</span>
+    </button>
+</div>
+    </div>
+</nav>
+
+<!-- Product Listing -->
+<section id="product-list" class="container mx-auto py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Products will be injected here by JavaScript -->
+</section>
+
+<!-- Cart Modal -->
+<div id="cart-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden">
+    <div class="container mx-auto p-6 bg-white rounded-lg max-w-lg">
+        <h2 class="text-xl font-bold mb-4">Shopping Cart</h2>
+        <ul id="cart-items" class="mb-4"></ul>
+        <button id="checkout-btn" class="bg-blue-500 text-white px-4 py-2 rounded">Checkout</button>
+        <button id="close-cart-btn" class="mt-4 text-blue-500">Close</button>
+    </div>
+</div>
+
+<!-- Checkout Form -->
+<div id="checkout-form" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden">
+    <div class="container mx-auto p-6 bg-white rounded-lg max-w-lg">
+        <h2 class="text-xl font-bold mb-4">Checkout</h2>
+        <form id="checkout-form-content">
+            <input type="text" placeholder="Name" class="border p-2 w-full mb-4" required>
+            <input type="email" placeholder="Email" class="border p-2 w-full mb-4" required>
+            <input type="text" placeholder="Address" class="border p-2 w-full mb-4" required>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit Order</button>
+        </form>
+        <button id="close-checkout-btn" class="mt-4 text-blue-500">Close</button>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">What Our Customers Say</h2>
+        <div id="reviews-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Dynamic reviews go here-->
+            
+        </div>
+    </div>
+</section>
+
+<!-- Review Submission Form -->
+<section class="py-16 bg-gray-100">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Submit a Review</h2>
+        <form method="post" id="review-form" class="max-w-md mx-auto bg-white p-6 rounded shadow-md">
+            <div class="mb-4">
+                <input type="text" id="customer_name" name="customer_name" placeholder="Your Name" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <select id="rating" name="rating" class="w-full p-2 border rounded" required>
+                    <option value="" disabled selected>Rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Good</option>
+                    <option value="3">3 - Average</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="1">1 - Very Poor</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <textarea id="comment" name="comment" placeholder="Your Review" class="w-full p-2 border rounded" required></textarea>
+            </div>
+            <input type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" value="Submit Review" />
+        </form>
+    </div>
+</section>
+
+<footer class="bg-blue-500 text-white py-6">
+    <div class="container mx-auto text-center">
+        <p>&copy; 2024 GadgetHaven. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Function to display the user's name from localStorage
+    function displayUserName() {
+        const customer = localStorage.getItem("customerName"); // Replace 'userName' with your key
+        const userNameElement = document.getElementById("customerName");
+
+        if (customer) {
+            userNameElement.innerText = `Welcome, ${customer}`;
+        } else {
+            userNameElement.innerText = "Welcome, Guest";
+        }
+    }
+
+    // Call the function on page load
+    displayUserName();
+</script>
+
+<script src="../scripts/product.js"></script>
+</body>
+</html>
