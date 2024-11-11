@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbname = 'ecommerce';
 $username = 'root';
-$password = '';
+$password = 'M0n0chromi@';
 
 try {
     // Create a PDO connection

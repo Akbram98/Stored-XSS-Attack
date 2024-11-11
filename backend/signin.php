@@ -4,7 +4,7 @@
 header('Content-Type: application/json');
 
 // Connect to the database
-$mysqli = new mysqli("localhost", "root", "", "ecommerce");
+$mysqli = new mysqli("localhost", "root", "M0n0chromi@", "ecommerce");
 
 if ($mysqli->connect_error) {
     echo json_encode(["success" => false, "message" => "Database connection failed."]);

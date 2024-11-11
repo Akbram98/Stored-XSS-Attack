@@ -4,7 +4,7 @@
 // Database connection parameters
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "M0n0chromi@";
 $dbname = "ecommerce";
 
 $conn = new mysqli($servername, $username, $password, $dbname);

@@ -6,8 +6,8 @@ header("Content-Type: application/json");
 // Database connection details
 $servername = "localhost";
 $username = "root";
-$password = ""; //TODO: add ur username password
-$dbname = "ecommerce"; //TODO: whatever your database name is
+$password = "M0n0chromi@";
+$dbname = "ecommerce";
 
 // Check if data is posted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
