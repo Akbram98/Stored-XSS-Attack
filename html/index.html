@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GadgetHaven - Welcome</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-<nav class="bg-white shadow p-4">
+    <nav class="bg-white shadow p-4">
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo and Store Name -->
             <div class="flex items-center gap-2">
                 <img src="../images/logo.png" alt="GadgetHaven Logo" class="h-8 w-8"> <!-- Adjust size as needed -->
                 <h1 class="text-2xl font-bold text-blue-500">GadgetHaven</h1>
             </div>
-    
+
             <!-- Sign-In/Register Button -->
             <div>
                 <button id="auth-toggle-btn" class="text-blue-500 mr-4">Sign In / Register</button>
@@ -23,132 +25,148 @@
         </div>
     </nav>
 
-<!-- Hero Section -->
-<section class="bg-cover bg-center h-screen text-white" style="background-image: url('../images/landing.jpeg');">
-    <div class="flex items-center justify-center h-full bg-opacity-50 bg-black">
-        <div class="text-center max-w-2xl px-4">
-            <h1 class="text-5xl font-bold mb-6">Welcome to GadgetHaven</h1>
-            <p class="text-2xl italic leading-relaxed mb-8">
-                &ldquo;Discover the latest in smartphones, tablets, laptops, and smartwatches, all at your fingertips.
-                 Whether you're looking to upgrade, find the perfect device for work, or gift a loved one, we have a range of options to suit every need and budget.
-                  Explore our collections, enjoy exclusive deals, and experience shopping made simple. Your next device is just a click away!&rdquo;
-            </p>
-            <button id="sign-in-btn" class="bg-blue-500 text-white px-10 py-4 text-lg rounded font-semibold hover:bg-blue-700">
-                Sign In to Start Shopping!
-            </button>
-        </div>
-    </div>
-</section>
-<!-- Featured Products Section -->
-<section id="featured-products" class="py-16 bg-white">
-    <div class="container mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center">Featured Products</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <!-- Product Card 1 -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                <img src="../images/laptops.jpg" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="font-bold text-lg text-gray-800">Laptops</h3>
-                <p class="text-blue-500 text-xl font-semibold mt-2">$500 - $3000</p>
-               <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
-            </div>
-            <!-- Add more product cards as needed -->
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                <img src="../images/tablets.jpg" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="font-bold text-lg text-gray-800">Tablets</h3>
-                <p class="text-blue-500 text-xl font-semibold mt-2">$200 - $1200</p>
-               <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
-            </div>
-
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                <img src="../images/smartphones.jpeg" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="font-bold text-lg text-gray-800">Smartphones</h3>
-                <p class="text-blue-500 text-xl font-semibold mt-2">$200 - $1500</p>
-               <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
-            </div>
-
-            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
-                <img src="../images/smartwatches.jpeg" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
-                <h3 class="font-bold text-lg text-gray-800">Smartwatches</h3>
-                <p class="text-blue-500 text-xl font-semibold mt-2">$200 - $600</p>
-               <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
+    <!-- Hero Section -->
+    <section class="bg-cover bg-center h-screen text-white" style="background-image: url('../images/landing.jpeg');">
+        <div class="flex items-center justify-center h-full bg-opacity-50 bg-black">
+            <div class="text-center max-w-2xl px-4">
+                <h1 class="text-5xl font-bold mb-6">Welcome to GadgetHaven</h1>
+                <p class="text-2xl italic leading-relaxed mb-8">
+                    &ldquo;Discover the latest in smartphones, tablets, laptops, and smartwatches, all at your
+                    fingertips.
+                    Whether you're looking to upgrade, find the perfect device for work, or gift a loved one, we have a
+                    range of options to suit every need and budget.
+                    Explore our collections, enjoy exclusive deals, and experience shopping made simple. Your next
+                    device is just a click away!&rdquo;
+                </p>
+                <button id="sign-in-btn"
+                    class="bg-blue-500 text-white px-10 py-4 text-lg rounded font-semibold hover:bg-blue-700">
+                    Sign In to Start Shopping!
+                </button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    <!-- Featured Products Section -->
+    <section id="featured-products" class="py-16 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-8 text-center">Featured Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <img src="../images/laptops.jpg" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="font-bold text-lg text-gray-800">Laptops</h3>
+                    <p class="text-blue-500 text-xl font-semibold mt-2">$500 - $3000</p>
+                    <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
+                </div>
+                <!-- Add more product cards as needed -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <img src="../images/tablets.jpg" alt="Product Image" class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="font-bold text-lg text-gray-800">Tablets</h3>
+                    <p class="text-blue-500 text-xl font-semibold mt-2">$200 - $1200</p>
+                    <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
+                </div>
+
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <img src="../images/smartphones.jpeg" alt="Product Image"
+                        class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="font-bold text-lg text-gray-800">Smartphones</h3>
+                    <p class="text-blue-500 text-xl font-semibold mt-2">$200 - $1500</p>
+                    <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
+                </div>
+
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <img src="../images/smartwatches.jpeg" alt="Product Image"
+                        class="w-full h-48 object-cover rounded mb-4">
+                    <h3 class="font-bold text-lg text-gray-800">Smartwatches</h3>
+                    <p class="text-blue-500 text-xl font-semibold mt-2">$200 - $600</p>
+                    <!--<button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-700 w-full">View Product</button>-->
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-<!-- Testimonials Section -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-8">What Our Customers Say</h2>
-        <div id="reviews-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <!-- Dynamic reviews go here-->
-            
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-8">What Our Customers Say</h2>
+            <div id="reviews-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <!-- Dynamic reviews go here-->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Submission Form -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-4">Submit a Review</h2>
+            <form method="post" id="review-form" class="max-w-md mx-auto bg-white p-6 rounded shadow-md">
+                <div class="mb-4">
+                    <input type="text" id="customer_name" name="customer_name" placeholder="Your Name"
+                        class="w-full p-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <select id="rating" name="rating" class="w-full p-2 border rounded" required>
+                        <option value="" disabled selected>Rating</option>
+                        <option value="5">5 - Excellent</option>
+                        <option value="4">4 - Good</option>
+                        <option value="3">3 - Average</option>
+                        <option value="2">2 - Poor</option>
+                        <option value="1">1 - Very Poor</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <textarea id="comment" name="comment" placeholder="Your Review" class="w-full p-2 border rounded"
+                        required></textarea>
+                </div>
+                <input type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    value="Submit Review" />
+            </form>
+        </div>
+    </section>
+
+    <!-- Sign-In and Registration Modal -->
+    <div id="auth-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-start justify-end p-4">
+        <div class="bg-white rounded-lg max-w-md w-full md:w-1/3 p-6">
+            <div class="flex justify-between border-b pb-2 mb-4">
+                <button id="sign-in-tab" class="text-lg font-semibold text-blue-500">Sign In</button>
+                <button id="register-tab" class="text-lg font-semibold text-gray-500">Register</button>
+            </div>
+
+            <!-- Sign-In Form -->
+            <form id="sign-in-form">
+                <input type="email" placeholder="Email" class="border p-2 w-full mb-4" required>
+                <input type="password" placeholder="Password" class="border p-2 w-full mb-4" required>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Sign In</button>
+            </form>
+
+            <!-- Registration Form -->
+            <form id="register-form" class="hidden">
+                <input type="text" placeholder="Full Name" class="border p-2 w-full mb-4" required>
+                <input type="email" placeholder="Email" class="border p-2 w-full mb-4" required>
+                <input type="password" placeholder="Password" class="border p-2 w-full mb-4" required>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Register</button>
+            </form>
+
+            <button id="close-auth-btn" class="mt-4 text-blue-500">Close</button>
         </div>
     </div>
-</section>
 
-<!-- Review Submission Form -->
-<section class="py-16 bg-gray-100">
-    <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-4">Submit a Review</h2>
-        <form method="post" id="review-form" class="max-w-md mx-auto bg-white p-6 rounded shadow-md">
-            <div class="mb-4">
-                <input type="text" id="customer_name" name="customer_name" placeholder="Your Name" class="w-full p-2 border rounded" required>
-            </div>
-            <div class="mb-4">
-                <select id="rating" name="rating" class="w-full p-2 border rounded" required>
-                    <option value="" disabled selected>Rating</option>
-                    <option value="5">5 - Excellent</option>
-                    <option value="4">4 - Good</option>
-                    <option value="3">3 - Average</option>
-                    <option value="2">2 - Poor</option>
-                    <option value="1">1 - Very Poor</option>
-                </select>
-            </div>
-            <div class="mb-4">
-                <textarea id="comment" name="comment" placeholder="Your Review" class="w-full p-2 border rounded" required></textarea>
-            </div>
-            <input type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" value="Submit Review" />
-        </form>
-    </div>
-</section>
 
-<!-- Sign-In and Registration Modal -->
-<div id="auth-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-start justify-end p-4">
-    <div class="bg-white rounded-lg max-w-md w-full md:w-1/3 p-6">
-        <div class="flex justify-between border-b pb-2 mb-4">
-            <button id="sign-in-tab" class="text-lg font-semibold text-blue-500">Sign In</button>
-            <button id="register-tab" class="text-lg font-semibold text-gray-500">Register</button>
+    <!-- Footer -->
+    <footer class="bg-blue-500 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 GadgetHaven. All rights reserved.</p>
+            <a href="#" id="clear-reviews" class="text-sm text-red-500 hover:text-red-700">
+                <span class="mr-1">🗑️</span>Clear All Reviews
+            </a>
+            <a href="#" id="clear-customers" class="text-sm text-red-500 hover:text-red-700">
+                <span class="mr-1">🗑️</span>Clear All Customers
+            </a>
         </div>
+    </footer>
 
-        <!-- Sign-In Form -->
-        <form id="sign-in-form">
-            <input type="email" placeholder="Email" class="border p-2 w-full mb-4" required>
-            <input type="password" placeholder="Password" class="border p-2 w-full mb-4" required>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Sign In</button>
-        </form>
-
-        <!-- Registration Form -->
-        <form id="register-form" class="hidden">
-            <input type="text" placeholder="Full Name" class="border p-2 w-full mb-4" required>
-            <input type="email" placeholder="Email" class="border p-2 w-full mb-4" required>
-            <input type="password" placeholder="Password" class="border p-2 w-full mb-4" required>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Register</button>
-        </form>
-
-        <button id="close-auth-btn" class="mt-4 text-blue-500">Close</button>
-    </div>
-</div>
-
-
-<!-- Footer -->
-<footer class="bg-blue-500 text-white py-6">
-    <div class="container mx-auto text-center">
-        <p>&copy; 2024 GadgetHaven. All rights reserved.</p>
-    </div>
-</footer>
-
-<script src="../scripts/index.js"></script>
+    <script src="../scripts/index.js"></script>
 </body>
+
 </html>

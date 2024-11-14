@@ -4,8 +4,32 @@
 // Database connection parameters
 $servername = "localhost";
 $username = "root";
-$password = "M0n0chromi@";
+$password = "";
 $dbname = "ecommerce";
+
+// Create table customers in the database if it doesn't exist
+try {
+    $pdo = new PDO("mysql:host=$host", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Create the database if it doesn't exist
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS $dbname CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+
+    // Connect to the newly created database
+    $pdo->exec("USE $dbname");
+
+    // Create the customers table if it doesn't exist
+    $pdo->exec("CREATE TABLE IF NOT EXISTS customers (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(100) NOT NULL,
+        password VARCHAR(64) NOT NULL,
+        salt VARCHAR(32) NOT NULL,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+} catch (PDOException $e) {
+    echo json_encode(['error' => $e->getMessage()]);
+}
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
