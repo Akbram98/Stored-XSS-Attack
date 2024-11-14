@@ -138,7 +138,7 @@ const submitForm = async (name, email, password) => {
         const result = await response.json();
 
         // Check the content of the response and act accordingly
-        if (result.message !== null && result.message === "Customer registered successfully") {
+        if (result.success) {
             showAlert("You’re now registered as one of our valued customers. Please sign in to start your shopping journey with us!");
             // Handle success (e.g., redirect to login or another page)
         } else {

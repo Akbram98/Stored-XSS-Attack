@@ -1,0 +1,49 @@
+/* Ensure the modal is centered both horizontally and vertically */
+#success-modal {
+    display: none; /* Initially hidden */
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+/* Modal container with proper width, padding, and shadow */
+#success-modal .bg-white {
+    max-width: 600px; /* Maximum width of the modal */
+    max-height: 80vh; /* Limit the height */
+    overflow-y: auto; /* Allow scrolling if the content overflows */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the order summary section */
+#success-cart-summary {
+    background-color: #f9fafb;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+/* Align the price summary properly */
+#success-cart-summary .border-t {
+    border-top: 2px solid #e0e0e0; /* Light border for separation */
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.125rem; /* Slightly larger font */
+    font-weight: bold;
+    color: #4a5568; /* Darker text color */
+}
+
+/* Ensure buttons have proper spacing and hover effects */
+button {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4c9ef5; /* Lighter blue on hover */
+}

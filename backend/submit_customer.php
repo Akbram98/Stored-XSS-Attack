@@ -9,7 +9,7 @@ $dbname = "ecommerce";
 
 // Create table customers in the database if it doesn't exist
 try {
-    $pdo = new PDO("mysql:host=$host", $username, $password);
+    $pdo = new PDO("mysql:host=$servername", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Create the database if it doesn't exist
@@ -57,9 +57,9 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("sssss", $name, $email, $hashedPassword, $salt, $date);
 
 if ($stmt->execute()) {
-    echo json_encode(["message" => "Customer registered successfully"]);
+    echo json_encode(["success" => true]);
 } else {
-    echo json_encode(["error" => "Error: " . $stmt->error]);
+    echo json_encode(["error" => "Error: " . $stmt->error, "success" => false]);
 }
 
 // Close the connection
