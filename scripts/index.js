@@ -7,7 +7,60 @@ const registerForm = document.getElementById("register-form");
 const authToggleBtn = document.getElementById("auth-toggle-btn");
 const closeAuthBtn = document.getElementById("close-auth-btn");
 const productSigninBtn = document.getElementById("sign-in-btn");
+const clearReviews = document.getElementById("clear-reviews");
+const clearCustomers = document.getElementById("clear-customers");
 
+// Clear customers
+clearCustomers.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing customers');
+
+    try {
+        const response = await fetch('../backend/clear_customers.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the customers section
+            console.log('Customers cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear customers');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing customers');
+    }
+
+});
+
+// Clear reviews
+clearReviews.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing reviews');
+
+    try {
+        const response = await fetch('../backend/clear_reviews.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the reviews section
+            console.log('Reviews cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear reviews');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing reviews');
+    }
+
+});
 
 // Show modal with Sign-In form initially
 authToggleBtn.addEventListener("click", () => {
@@ -129,7 +182,7 @@ signInForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = e.target.querySelector("input[type='email']").value;
     const password = e.target.querySelector("input[type='password']").value;
-    
+
     // Sign-in logic (API or validation logic goes here)
     await signIn(email, password);
     authModal.classList.add("hidden");
@@ -163,8 +216,8 @@ async function loadReviews() {
         reviewsContainer.innerHTML = ""; // Clear any existing reviews
 
         // Create HTML for each review and add it to the container
-         // Check if there are reviews in the database
-         if (reviews.length === 0) {
+        // Check if there are reviews in the database
+        if (reviews.length === 0) {
             // No reviews found, show a message encouraging the first review
             // Ensure reviewsContainer is centered and spans full width
             reviewsContainer.className = "flex justify-center items-center w-full";
@@ -176,28 +229,28 @@ async function loadReviews() {
             // Create the actual message
             const noReviewsMessage = document.createElement("p");
             noReviewsMessage.className = "text-lg text-center text-gray-600 italic p-6 bg-gray-100 rounded-lg max-w-md"; // max-w-md ensures it doesn’t take up too much width
-            noReviewsMessage.innerText = 
+            noReviewsMessage.innerText =
                 "No customer reviews yet. Be the first to share your thoughts and help others make the perfect choice!";
 
             // Append message to wrapper, then wrapper to container
             noReviewsWrapper.appendChild(noReviewsMessage);
             reviewsContainer.appendChild(noReviewsWrapper);
-         }
-         else{
+        }
+        else {
             reviewsContainer.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8";
             reviews.forEach(rev => {
                 const reviewCard = document.createElement("div");
                 reviewCard.className = "p-6 bg-gray-100 rounded-lg shadow-md";
 
-            reviewCard.innerHTML = `
+                reviewCard.innerHTML = `
                 <h3 class="text-xl font-semibold text-gray-800">${rev.customer_name}</h3>
                 <p class="text-sm text-gray-500">Submitted on: <span class="font-medium">${new Date(rev.created_at).toLocaleDateString()}</span></p>
                 <div class="flex items-center mt-2 mb-2"><span class="text-yellow-400 text-xl">${'⭐️'.repeat(rev.rating)}</span></div>
                 <p class="text-gray-700 italic overflow-y-auto max-h-24">“${rev.review}”</p>
             `;
 
-            reviewsContainer.appendChild(reviewCard);
-        });
+                reviewsContainer.appendChild(reviewCard);
+            });
         }
     } catch (error) {
         console.error("Error loading reviews:", error);

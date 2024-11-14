@@ -1,3 +1,31 @@
+const clearReviews = document.getElementById("clear-reviews");
+
+// Clear reviews
+clearReviews.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing reviews');
+
+    try {
+        const response = await fetch('../backend/clear_reviews.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the reviews section
+            console.log('Reviews cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear reviews');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing reviews');
+    }
+
+});
+
 // Sample products
 const products = [
     { id: 1, name: "Macbook Pro", price: 1900.00, image: "../images/products/macbook.jpeg" },
@@ -19,8 +47,8 @@ let cart = [];
 const productList = document.getElementById("product-list");
 products.forEach(product => {
     const productElement = document.createElement("div");
-productElement.className = "bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1";
-productElement.innerHTML = `
+    productElement.className = "bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1";
+    productElement.innerHTML = `
     <div class="relative overflow-hidden rounded-lg h-40">
         <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-105">
     </div>
@@ -31,7 +59,7 @@ productElement.innerHTML = `
         Add to Cart
     </button>
 `;
-productList.appendChild(productElement);
+    productList.appendChild(productElement);
 });
 
 // Add to cart function
@@ -109,8 +137,8 @@ async function loadReviews() {
         reviewsContainer.innerHTML = ""; // Clear any existing reviews
 
         // Create HTML for each review and add it to the container
-         // Check if there are reviews in the database
-         if (reviews.length === 0) {
+        // Check if there are reviews in the database
+        if (reviews.length === 0) {
             // No reviews found, show a message encouraging the first review
             // Ensure reviewsContainer is centered and spans full width
             reviewsContainer.className = "flex justify-center items-center w-full";
@@ -122,28 +150,28 @@ async function loadReviews() {
             // Create the actual message
             const noReviewsMessage = document.createElement("p");
             noReviewsMessage.className = "text-lg text-center text-gray-600 italic p-6 bg-gray-100 rounded-lg max-w-md"; // max-w-md ensures it doesn’t take up too much width
-            noReviewsMessage.innerText = 
+            noReviewsMessage.innerText =
                 "No customer reviews yet. Be the first to share your thoughts and help others make the perfect choice!";
 
             // Append message to wrapper, then wrapper to container
             noReviewsWrapper.appendChild(noReviewsMessage);
             reviewsContainer.appendChild(noReviewsWrapper);
-         }
-         else{
+        }
+        else {
             reviewsContainer.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8";
             reviews.forEach(rev => {
                 const reviewCard = document.createElement("div");
                 reviewCard.className = "p-6 bg-gray-100 rounded-lg shadow-md";
 
-            reviewCard.innerHTML = `
+                reviewCard.innerHTML = `
                 <h3 class="text-xl font-semibold text-gray-800">${rev.customer_name}</h3>
                 <p class="text-sm text-gray-500">Submitted on: <span class="font-medium">${new Date(rev.created_at).toLocaleDateString()}</span></p>
                 <div class="flex items-center mt-2 mb-2"><span class="text-yellow-400 text-xl">${'⭐️'.repeat(rev.rating)}</span></div>
                 <p class="text-gray-700 italic overflow-y-auto max-h-24">“${rev.review}”</p>
             `;
 
-            reviewsContainer.appendChild(reviewCard);
-        });
+                reviewsContainer.appendChild(reviewCard);
+            });
         }
     } catch (error) {
         console.error("Error loading reviews:", error);
