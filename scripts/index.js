@@ -9,6 +9,15 @@ const closeAuthBtn = document.getElementById("close-auth-btn");
 const productSigninBtn = document.getElementById("sign-in-btn");
 const clearReviews = document.getElementById("clear-reviews");
 const clearCustomers = document.getElementById("clear-customers");
+const clearMostRecentReview = document.getElementById("clear-most-recent-review");
+
+// Check if the user is already signed in
+const email = getCookie("email");
+const password = getCookie("password");
+const customerName = getCookie("customerName");
+
+console.log('email:', email);
+console.log('password:', password);
 
 // Clear customers
 clearCustomers.addEventListener('click', async (e) => {
@@ -62,6 +71,32 @@ clearReviews.addEventListener('click', async (e) => {
 
 });
 
+// Clear most recent review
+clearMostRecentReview.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing most recent review');
+
+    try {
+        const response = await fetch('../backend/clear_most_recent_review.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the reviews section
+            console.log('Most recent review cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear most recent review');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing most recent review');
+    }
+
+});
+
 // Show modal with Sign-In form initially
 authToggleBtn.addEventListener("click", () => {
     authModal.classList.remove("hidden");
@@ -92,6 +127,11 @@ const signIn = async (email, password) => {
         const result = await response.json();
 
         if (result.success) {
+            // Set cookies for email and password
+            setCookie("email", email, 7); // Expires in 7 days
+            setCookie("password", password, 7); // Expires in 7 days
+            setCookie("customerName", result.name, 7); // Expires in 7 days
+
             localStorage.setItem('customerName', result.name);
 
             // Display success message and redirect
@@ -177,6 +217,26 @@ function showAlert(message) {
     }, 4500);
 }
 
+// Function to set a cookie
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// Function to get a cookie
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
 // Handle Sign-In Form Submission
 signInForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -185,6 +245,7 @@ signInForm.addEventListener("submit", async (e) => {
 
     // Sign-in logic (API or validation logic goes here)
     await signIn(email, password);
+
     authModal.classList.add("hidden");
 });
 
@@ -291,6 +352,11 @@ document.getElementById("review-form").addEventListener("submit", async function
         console.error("Error submitting review:", error);
     }
 });
+
+if (email && password) {
+    // Auto sign-in
+    signIn(email, password);
+}
 
 // Load reviews when the page loads
 window.addEventListener("DOMContentLoaded", loadReviews);

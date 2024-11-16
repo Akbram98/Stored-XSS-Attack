@@ -1,4 +1,42 @@
 const clearReviews = document.getElementById("clear-reviews");
+<<<<<<< Updated upstream
+=======
+const checkoutForm = document.getElementById('checkout-form-content');
+const submitOrderBtn = checkoutForm.querySelector('button[type="submit"]');
+const closeCheckoutBtn = document.getElementById('close-checkout-btn');
+const checkoutModal = document.getElementById('checkout-form');
+const successModal = document.getElementById('success-modal');
+const closeSuccessBtn = document.getElementById('close-success-btn');
+const clearMostRecentReview = document.getElementById('clear-most-recent-review');
+
+console.log(document.cookie);
+
+// Clear most recent review
+clearMostRecentReview.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing most recent review');
+
+    try {
+        const response = await fetch('../backend/clear_most_recent_review.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the reviews section
+            console.log('Most recent review cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear most recent review');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing most recent review');
+    }
+
+});
+>>>>>>> Stashed changes
 
 // Clear reviews
 clearReviews.addEventListener('click', async (e) => {
@@ -26,6 +64,17 @@ clearReviews.addEventListener('click', async (e) => {
 
 });
 
+<<<<<<< Updated upstream
+=======
+//Logout from session
+document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('userName');
+    deleteCartCookie();
+    deleteCustomerCookie();
+    window.location.href = '../html/index.html'; // Refresh to reset any user-specific content
+});
+
+>>>>>>> Stashed changes
 // Sample products
 const products = [
     { id: 1, name: "Macbook Pro", price: 1900.00, image: "../images/products/macbook.jpeg" },
@@ -62,6 +111,102 @@ products.forEach(product => {
     productList.appendChild(productElement);
 });
 
+<<<<<<< Updated upstream
+=======
+
+// Event listener for the Submit Order button
+submitOrderBtn.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent form submission to handle with JS
+
+    // Get form data
+    const formData = new FormData(checkoutForm);
+    const nameOnCard = formData.get('name-on-card');
+    const paymentType = formData.get('payment-type');
+    const creditCardNumber = formData.get('credit-card-number');
+    const cvv = formData.get('cvv');
+    const expiry = formData.get('expiry');
+
+    // Get transaction details (order summary)
+    const totalPrice = document.getElementById('total-price').textContent;
+
+    // Populate success modal with order details
+    const successCartItems = document.getElementById('success-cart-items-summary');
+    successCartItems.innerHTML = ''; // Clear previous items
+
+    Array.from(cart).forEach(item => {
+        // Create list item for product
+        const listItem = document.createElement('li');
+        listItem.className = "flex justify-between text-gray-800";
+
+        listItem.innerHTML = `<span>${item.name}</span><span>$${item.price.toFixed(2)}</span>`;
+
+        // Append the list item to the success modal cart summary
+        successCartItems.appendChild(listItem);
+    });
+
+    // Set total price in success modal
+    document.getElementById('success-total-price').textContent = totalPrice;
+
+    // Show the success modal
+    checkoutModal.classList.add('hidden'); // Hide checkout modal
+    successModal.classList.remove('hidden'); // Show success modal
+});
+
+
+// Event listener for the Close button in the success modal
+closeSuccessBtn.addEventListener('click', () => {
+    successModal.classList.add('hidden'); // Hide success modal
+    cart = [];
+    deleteCartCookie();
+    updateCartCount();
+});
+
+// Event listener for the Close button in the checkout modal
+closeCheckoutBtn.addEventListener('click', () => {
+    checkoutModal.classList.add('hidden'); // Hide checkout modal
+});
+
+// Save cart to a cookie
+function setCartCookie(cart) {
+    const cartJSON = JSON.stringify(cart); // Convert cart object to a JSON string
+    document.cookie = `cart=${encodeURIComponent(cartJSON)}; path=/; max-age=31536000`; // Set cookie for 1 year
+}
+
+// On page load, retrieve the cart from the cookie
+window.onload = () => {
+    cart = getCartFromCookie(); // Retrieve cart from cookie
+    updateCartCount();
+};
+
+// Retrieve cart from cookie
+function getCartFromCookie() {
+    const cookies = document.cookie.split('; ');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].split('=');
+        if (cookie[0] === 'cart') {
+            return JSON.parse(decodeURIComponent(cookie[1])); // Parse JSON string back into object
+        }
+    }
+    return []; // Return empty array if no cart is found
+}
+
+// Delete cart cookie
+function deleteCartCookie() {
+    // Delete cart cookie
+    document.cookie = 'cart=; path=/; max-age=0'; // Delete the cookie by setting its max-age to 0
+}
+
+function deleteCustomerCookie() {
+    // Delete email cookie
+    document.cookie = 'email=; path=/; max-age=0';
+    // Delete name cookie
+    document.cookie = 'customerName=; path=/; max-age=0';
+    // Delete password cookie
+    document.cookie = 'password=; path=/; max-age=0';
+}
+
+
+>>>>>>> Stashed changes
 // Add to cart function
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
@@ -78,11 +223,31 @@ function updateCartCount() {
 document.getElementById("cart-btn").addEventListener("click", () => {
     const cartItems = document.getElementById("cart-items");
     cartItems.innerHTML = "";
+<<<<<<< Updated upstream
     cart.forEach((item, index) => {
         const cartItem = document.createElement("li");
         cartItem.className = "flex justify-between items-center py-2";
         cartItem.innerHTML = `
             ${item.name} - $${item.price.toFixed(2)}
+=======
+    if (cart.length == 0) {
+        cartItems.innerHTML = `
+        <div class="text-center text-gray-600 py-6">
+            <h3 class="text-xl font-semibold mb-2">Your cart is empty</h3>
+            <p class="text-gray-500">It looks like you haven't added anything to your cart yet. Please browse our products and add them to the cart to proceed with your purchase.</p>
+        </div>
+    `;
+
+        document.getElementById("checkout-btn").classList.add("hidden");
+    }
+    else {
+        document.getElementById("checkout-btn").classList.remove("hidden");
+        cart.forEach((item, index) => {
+            const cartItem = document.createElement("li");
+            cartItem.className = "flex justify-between items-center py-2";
+            cartItem.innerHTML = `
+                ${item.name} - $${item.price.toFixed(2)}
+>>>>>>> Stashed changes
             <button onclick="removeFromCart(${index})" class="text-red-500">Remove</button>
         `;
         cartItems.appendChild(cartItem);
