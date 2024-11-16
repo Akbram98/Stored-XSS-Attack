@@ -5,6 +5,35 @@ const closeCheckoutBtn = document.getElementById('close-checkout-btn');
 const checkoutModal = document.getElementById('checkout-form');
 const successModal = document.getElementById('success-modal');
 const closeSuccessBtn = document.getElementById('close-success-btn');
+const clearMostRecentReview = document.getElementById("clear-most-recent-review");
+
+console.log(document.cookie);
+
+// Clear most recent review
+clearMostRecentReview.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing most recent review');
+
+    try {
+        const response = await fetch('../backend/clear_most_recent_review.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the reviews section
+            console.log('Most recent review cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear most recent review');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing most recent review');
+    }
+
+});
 
 // Clear reviews
 clearReviews.addEventListener('click', async (e) => {
@@ -36,8 +65,10 @@ clearReviews.addEventListener('click', async (e) => {
 document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('userName');
     deleteCartCookie(); // For cookies
+    deleteCustomerCookie();
     window.location.href = '../html/index.html'; // Refresh to reset any user-specific content
 });
+
 
 // Sample products
 const products = [
@@ -80,13 +111,21 @@ products.forEach(product => {
 submitOrderBtn.addEventListener('click', (event) => {
     event.preventDefault(); // Prevent form submission to handle with JS
 
-    // Get form data
+    /*// Get form data
     const formData = new FormData(checkoutForm);
     const nameOnCard = formData.get('name-on-card');
     const paymentType = formData.get('payment-type');
     const creditCardNumber = formData.get('credit-card-number');
     const cvv = formData.get('cvv');
     const expiry = formData.get('expiry');
+
+    console.log(nameOnCard);
+    console.log(paymentType);
+    console.log(creditCardNumber);
+    console.log(cvv);
+    console.log(expiry);*/
+
+
     
     // Get transaction details (order summary)
     const totalPrice = document.getElementById('total-price').textContent;
@@ -156,6 +195,16 @@ function getCartFromCookie() {
 function deleteCartCookie() {
     document.cookie = 'cart=; path=/; max-age=0'; // Delete the cookie by setting its max-age to 0
 }
+
+function deleteCustomerCookie() {
+    // Delete email cookie
+    document.cookie = 'email=; path=/; max-age=0';
+    // Delete name cookie
+    document.cookie = 'customerName=; path=/; max-age=0';
+    // Delete password cookie
+    document.cookie = 'password=; path=/; max-age=0';
+}
+
 
 
 
