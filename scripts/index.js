@@ -11,33 +11,39 @@ const clearReviews = document.getElementById("clear-reviews");
 const clearCustomers = document.getElementById("clear-customers");
 const clearMostRecentReview = document.getElementById("clear-most-recent-review");
 
-// FUNCTION TO SET A COOKIE
-function setCookie(name, value, days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
-}
-
-// FUNCTION TO GET A COOKIE
-function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-// CHECK IF THE USER IS ALREADY SIGNED IN
+// Check if the user is already signed in
 const email = getCookie("email");
 const password = getCookie("password");
 const customerName = getCookie("customerName");
 
 console.log('email:', email);
 console.log('password:', password);
+
+// Clear most recent review
+clearMostRecentReview.addEventListener('click', async (e) => {
+    e.preventDefault();
+    console.log('Clearing most recent review');
+
+    try {
+        const response = await fetch('../backend/clear_most_recent_review.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // Refresh the reviews section
+            console.log('Most recent review cleared');
+            location.reload();
+        } else {
+            alert('Failed to clear most recent review');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error clearing most recent review');
+    }
+
+});
 
 // Clear customers
 clearCustomers.addEventListener('click', async (e) => {
@@ -91,32 +97,6 @@ clearReviews.addEventListener('click', async (e) => {
 
 });
 
-// CLEAR MOST RECENT REVIEW
-clearMostRecentReview.addEventListener('click', async (e) => {
-    e.preventDefault();
-    console.log('Clearing most recent review');
-
-    try {
-        const response = await fetch('../backend/clear_most_recent_review.php', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        if (response.ok) {
-            // Refresh the reviews section
-            console.log('Most recent review cleared');
-            location.reload();
-        } else {
-            alert('Failed to clear most recent review');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error clearing most recent review');
-    }
-
-});
-
 // Show modal with Sign-In form initially
 authToggleBtn.addEventListener("click", () => {
     authModal.classList.remove("hidden");
@@ -147,7 +127,7 @@ const signIn = async (email, password) => {
         const result = await response.json();
 
         if (result.success) {
-            // SET COOKIES FOR EMAIL AND PASSWORD
+            // Set cookies for email and password
             setCookie("email", email, 7); // Expires in 7 days
             setCookie("password", password, 7); // Expires in 7 days
             setCookie("customerName", result.name, 7); // Expires in 7 days
@@ -164,6 +144,26 @@ const signIn = async (email, password) => {
         showAlert("An error occurred. Please try again later.");
     }
 };
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// Function to get a cookie
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
 
 // Show Sign-In form
 signInTab.addEventListener("click", showSignInForm);
@@ -353,7 +353,7 @@ document.getElementById("review-form").addEventListener("submit", async function
 });
 
 if (email && password) {
-    // AUTO SIGN-IN
+    // Auto sign-in
     signIn(email, password);
 }
 
