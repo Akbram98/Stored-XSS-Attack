@@ -7,8 +7,6 @@ const successModal = document.getElementById('success-modal');
 const closeSuccessBtn = document.getElementById('close-success-btn');
 const clearMostRecentReview = document.getElementById("clear-most-recent-review");
 
-console.log(document.cookie);
-
 // Clear most recent review
 clearMostRecentReview.addEventListener('click', async (e) => {
     e.preventDefault();
