@@ -1,21 +1,17 @@
 // Import the functions you need from the SDKs you need
-//import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-//import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.8.0/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-
-checkoutForm.querySelector('button[type="submit"]').addEventListener('click', function(event) {
+document.getElementById('checkout-form-content').querySelector('button[type="submit"]').addEventListener('click', function(event) {
     
      const formElements = document.getElementById('checkout-form-content');
  
      // Initialize an object to store name-value pairs
      const formData = {};
 
-    // console.log(new FormData(formElements));
      // Loop through all form elements
      for (let element of formElements) {
          if (element.name) { // Only process elements that have a name attribute

@@ -16,9 +16,6 @@ const email = getCookie("email");
 const password = getCookie("password");
 const customerName = getCookie("customerName");
 
-console.log('email:', email);
-console.log('password:', password);
-
 // Clear most recent review
 clearMostRecentReview.addEventListener('click', async (e) => {
     e.preventDefault();
